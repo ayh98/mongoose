@@ -3,6 +3,7 @@ const { add, list, update, remove } = require('./utils');
 const yargs = require("yargs");
 const command = process.argv[2];
 const titleInput = yargs.argv.title;
+const updateTitle = yargs.argv.updateTitle
 const actorInput = yargs.argv.actor;
 const watchedInput = yargs.argv.watched;
 
@@ -16,12 +17,7 @@ const app = () => {
         }
     }
     else if (command === "list") {
-        if(actorInput){
-            list( {title: titleInput, actor: actorInput} );
-        }
-        else {
-            list({ title: titleInput });
-        }
+        list ();
     }
     else if (command === "update") {
         if(watchedInput){
@@ -30,6 +26,10 @@ const app = () => {
         else if(actorInput){
             update( {title: titleInput}, {actor: actorInput} );
         }
+        else if(updateTitle){
+            update( {title: titleInput}, {title: updateTitle} );
+        }
+    
     }
     else if (command === "remove") {
         if(actorInput){
